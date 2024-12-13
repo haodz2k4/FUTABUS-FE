@@ -10,3 +10,8 @@ export const getVehicles = async ({keyword = ""}) => {
     })
     return response.data.data.items
 }
+
+export const createVehicle = async (data) => {
+    const response = await axios.post(API_URL,data)
+    return response.data.data
+}

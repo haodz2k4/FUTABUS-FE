@@ -1,0 +1,61 @@
+.vehicle-content {
+    padding: 30px 0 30px 0;
+}
+
+.table-vehicles {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.table-vehicles, thead tr th, tbody tr td {
+    border: solid black;
+}
+
+.table-vehicles thead tr th {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.table-vehicles thead tr th, tbody tr td {
+    padding: 10px;
+    
+}
+
+.table-vehicles tbody tr td .btn-group {
+    display: flex;
+    justify-content: center;
+}
+
+/*CREATE CONTAINER*/
+.create-container {
+    background-color: lightcyan;
+    padding: 30px 20px 30px 20px;
+    border-radius: 30px;
+    margin-top: 30px;
+}
+
+
+
+.create-container .create-box {
+    display: flex;
+    justify-content: center;
+}
+.create-container .create-box .create-form h1 {
+    text-align: center;
+}
+.create-container .create-box .create-form .inp-box {
+    display: flex;
+    gap: 15px;
+}
+.create-container .create-box .create-form .inp-box .inp-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.btn-submit {
+    width: 100%;
+    margin-top: 30px;
+    padding: 18px ;
+    background-color: var(--color-one) !important;
+    color: var(--color-two);
+}

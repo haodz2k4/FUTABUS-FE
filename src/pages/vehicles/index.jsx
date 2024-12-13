@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react"
 import Header from "../../components/header"
-import './vehicle.css'
+import './styles.css'
 import moment from "moment";
 import Tool from "../../components/tool"
 const {getVehicles} = require("../../service/vehicles")
@@ -9,6 +9,7 @@ function Vehicles() {
 
     const [vehicles, setVehicles] = useState([]);
     const [keyword, setKeyword] = useState("")
+    
     useEffect(() => {
         loadData(keyword)
     },[keyword])
