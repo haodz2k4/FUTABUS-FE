@@ -1,0 +1,17 @@
+.tool-box {
+    background-color: lightgray;
+    padding: 50px 30px 50px 30px;
+    border-radius: 30px;
+    margin-bottom: 15px;
+}
+
+
+
+.search-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.search-box span {
+    font-weight: bold;
+}

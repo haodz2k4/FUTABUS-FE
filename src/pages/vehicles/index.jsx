@@ -2,6 +2,8 @@ import { useEffect, useState } from "react"
 import Header from "../../components/header"
 import './vehicle.css'
 import moment from "moment"
+import Tool from "../../components/tool"
+
 const {getVehicles} = require("../../service/vehicles")
 
 function Vehicles() {
@@ -19,8 +21,10 @@ function Vehicles() {
     return (
         <>
             <Header/>
+            
             <div className="vehicle-content">
                 <div className="container">
+                    <Tool/>
                     <table className="table-vehicles">
                         <thead>
                             <tr>

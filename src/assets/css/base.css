@@ -30,6 +30,11 @@ a {
     background-color: white;
 }
 
+.inp {
+    padding: 5px 5px 5px 5px;
+    border-radius: 10px;
+}
+
 body {
     font-family: var(--font-family);
 }
