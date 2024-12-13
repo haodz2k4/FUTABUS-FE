@@ -1,11 +1,13 @@
+import BtnCreate from './btn-create'
 import Search from './search'
 import './styles.css'
 
-function Tool() {
+function Tool({handleSearch}) {
 
     return (
         <div className="tool-box">
-            <Search/>
+            <Search handleSearch={handleSearch}/>
+            <BtnCreate/>
         </div>
     )
 

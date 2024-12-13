@@ -1,21 +1,26 @@
-import { useEffect, useState } from "react"
+import { createContext, useEffect, useState } from "react"
 import Header from "../../components/header"
 import './vehicle.css'
-import moment from "moment"
+import moment from "moment";
 import Tool from "../../components/tool"
-
 const {getVehicles} = require("../../service/vehicles")
 
 function Vehicles() {
 
     const [vehicles, setVehicles] = useState([]);
+    const [keyword, setKeyword] = useState("")
     useEffect(() => {
-        loadData()
-    },[])
+        loadData(keyword)
+    },[keyword])
 
-    async function loadData() {
-        const items = await getVehicles();
+    async function loadData(keyword) {
+        const items = await getVehicles({keyword});
         setVehicles(items)
+    }
+
+    function handleSearch(e) {
+        const keyword = e.target.value
+        setKeyword(keyword)
     }
 
     return (
@@ -24,7 +29,7 @@ function Vehicles() {
             
             <div className="vehicle-content">
                 <div className="container">
-                    <Tool/>
+                    <Tool handleSearch={handleSearch}/>
                     <table className="table-vehicles">
                         <thead>
                             <tr>

@@ -3,6 +3,8 @@
     padding: 50px 30px 50px 30px;
     border-radius: 30px;
     margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
 }
 
 
@@ -14,4 +16,8 @@
 
 .search-box span {
     font-weight: bold;
+}
+
+.btn-create {
+    background-color: greenyellow;
 }
