@@ -1,9 +1,10 @@
-import { createContext, useEffect, useState } from "react"
+import { createContext, useEffect, useRef, useState } from "react"
 import Header from "../../components/header"
 import './styles.css'
 import moment from "moment";
 import Tool from "../../components/tool"
 import { NavLink, useSearchParams } from "react-router-dom";
+import Pagination from "../../components/pagination";
 const {getVehicles, removeVehicle} = require("../../service/vehicles")
 
 function Vehicles() {
@@ -11,14 +12,19 @@ function Vehicles() {
     const [vehicles, setVehicles] = useState([]);
     const [keyword, setKeyword] = useState("")
     const [searchParam, setSearchParam] = useSearchParams();
+    const [countPage, setCountPage] = useState(0)
+    const skip = useRef(0)
     const status = searchParam.get('status');
+    const page = parseInt(searchParam.get('page') || 1)
     useEffect(() => {
-        loadData(keyword, status)
-    },[keyword, status])
+        loadData(keyword, status, page)
+    },[keyword, status, page])
 
-    async function loadData(keyword, status) {
-        const items = await getVehicles({keyword, status});
-        setVehicles(items)
+    async function loadData(keyword, status, page) {
+        const data = await getVehicles({keyword, status, page});
+        setCountPage(data.totalPages)
+        setVehicles(data.items)
+        skip.current = data.skip 
     }
 
     function handleSearchParam(currentStatus) {
@@ -41,6 +47,10 @@ function Vehicles() {
     async function handleRemoveVehicle(id) {
         await removeVehicle(id)
         await loadData()
+    }
+
+    function handlePagination(page) {
+        setSearchParam({page})
     }
 
     return (
@@ -67,7 +77,7 @@ function Vehicles() {
                             {
                                 vehicles.map((item, index) => (
                                     <tr>
-                                        <td>{index + 1}</td>
+                                        <td>{skip.current + index + 1}</td>
                                         <td>{item.id}</td>
                                         <td>{item.name}</td>
                                         <td>{item.type}</td>
@@ -88,6 +98,7 @@ function Vehicles() {
                             }
                         </tbody>
                     </table>
+                    <Pagination countPage={countPage} handlePagination={handlePagination} currentPage={page} />
                 </div>
             </div>
         </>

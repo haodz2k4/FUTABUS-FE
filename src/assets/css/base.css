@@ -38,3 +38,7 @@ a {
 body {
     font-family: var(--font-family);
 }
+
+.d-none {
+    display: none;
+}

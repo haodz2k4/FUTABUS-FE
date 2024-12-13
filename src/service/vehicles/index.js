@@ -2,14 +2,16 @@ import axios from "axios"
 
 const API_URL = `http://localhost:4000/api/v1/vehicles`
 
-export const getVehicles = async ({keyword = "", status}) => {
+export const getVehicles = async ({keyword = "", status, page, limit = 10}) => {
     const response = await axios.get(API_URL,{
         params: {
             keyword,
-            status
+            status,
+            page,
+            limit
         }
     })
-    return response.data.data.items
+    return response.data.data
 }
 
 export const createVehicle = async (data) => {
