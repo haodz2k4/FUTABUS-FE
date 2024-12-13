@@ -3,7 +3,8 @@ import Header from "../../components/header"
 import './styles.css'
 import moment from "moment";
 import Tool from "../../components/tool"
-const {getVehicles} = require("../../service/vehicles")
+import { NavLink } from "react-router-dom";
+const {getVehicles, removeVehicle} = require("../../service/vehicles")
 
 function Vehicles() {
 
@@ -22,6 +23,11 @@ function Vehicles() {
     function handleSearch(e) {
         const keyword = e.target.value
         setKeyword(keyword)
+    }
+
+    async function handleRemoveVehicle(id) {
+        await removeVehicle(id)
+        await loadData()
     }
 
     return (
@@ -54,13 +60,13 @@ function Vehicles() {
                                         <td>{item.type}</td>
                                         <td>{item.status}</td>
                                         <td>
-                                            <input type="number" defaultValue={item.capacity}/>
+                                            <input type="number" value={item.capacity}/>
                                         </td>
                                         <td>{moment(item.createdAt).format('MMMM Do YYYY, h:mm:ss a')}</td>
                                         <td>
                                             <div className="btn-group">
-                                                <button className="btn btn-edit">Sửa</button>
-                                                <button className="btn btn-delete">Xóa</button>
+                                                <button className="btn btn-edit"><NavLink to={`/vehicles/edit/${item.id}`}>Sửa</NavLink></button>
+                                                <button className="btn btn-delete" onClick={() => handleRemoveVehicle(item.id)}>Xóa</button>
                                                 <button className="btn btn-detail">Chi tiết</button>
                                             </div>
                                         </td>

@@ -15,3 +15,17 @@ export const createVehicle = async (data) => {
     const response = await axios.post(API_URL,data)
     return response.data.data
 }
+
+export const updateVehicle = async (id, data) => {
+    const response = await axios.patch(`${API_URL}/${id}`, data);
+    return response.data.data 
+}
+
+export const getVehicle = async (id) => {
+    const response = await axios.get(`${API_URL}/${id}`)
+    return response.data.data
+}
+
+export const removeVehicle = async (id) => {
+    await axios.delete(`${API_URL}/${id}`)
+}
