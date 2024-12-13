@@ -90,7 +90,7 @@ function Vehicles() {
                                             <div className="btn-group">
                                                 <button className="btn btn-edit"><NavLink to={`/vehicles/edit/${item.id}`}>Sửa</NavLink></button>
                                                 <button className="btn btn-delete" onClick={() => handleRemoveVehicle(item.id)}>Xóa</button>
-                                                <button className="btn btn-detail">Chi tiết</button>
+                                                <button className="btn btn-detail"><NavLink to={`/vehicles/${item.id}`}>Chi tiết</NavLink></button>
                                             </div>
                                         </td>
                                     </tr>
