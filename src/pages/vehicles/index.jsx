@@ -3,21 +3,34 @@ import Header from "../../components/header"
 import './styles.css'
 import moment from "moment";
 import Tool from "../../components/tool"
-import { NavLink } from "react-router-dom";
+import { NavLink, useSearchParams } from "react-router-dom";
 const {getVehicles, removeVehicle} = require("../../service/vehicles")
 
 function Vehicles() {
 
     const [vehicles, setVehicles] = useState([]);
     const [keyword, setKeyword] = useState("")
-    
+    const [searchParam, setSearchParam] = useSearchParams();
+    const status = searchParam.get('status');
     useEffect(() => {
-        loadData(keyword)
-    },[keyword])
+        loadData(keyword, status)
+    },[keyword, status])
 
-    async function loadData(keyword) {
-        const items = await getVehicles({keyword});
+    async function loadData(keyword, status) {
+        const items = await getVehicles({keyword, status});
         setVehicles(items)
+    }
+
+    function handleSearchParam(currentStatus) {
+        
+        if(status === currentStatus.status) {
+            const param = searchParam.delete("status")
+            setSearchParam(param)
+        }else {
+            setSearchParam({
+                status: currentStatus.status
+            })
+        }
     }
 
     function handleSearch(e) {
@@ -36,7 +49,7 @@ function Vehicles() {
             
             <div className="vehicle-content">
                 <div className="container">
-                    <Tool handleSearch={handleSearch}/>
+                    <Tool handleSearch={handleSearch} setSearchParam={handleSearchParam} currentStatus={status}/>
                     <table className="table-vehicles">
                         <thead>
                             <tr>
