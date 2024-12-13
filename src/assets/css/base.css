@@ -23,6 +23,13 @@ a {
     color: black;
 }
 
+.btn {
+    padding: 5px 10px 5px 10px;
+    border-radius: 10px;
+    font-weight: bold;
+    background-color: white;
+}
+
 body {
     font-family: var(--font-family);
 }

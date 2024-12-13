@@ -16,7 +16,7 @@ function Header() {
                     <div className="inner-menu">
                         <ul>
                             <li><NavLink to="/" className={({isActive}) => isActive ? 'nav-active' : ''}>Trang chủ</NavLink></li>
-                            <li><NavLink to="/vehicles">Phương tiện</NavLink></li>
+                            <li><NavLink to="/vehicles" className={({isActive}) => isActive ? 'nav-active' : ''}>Phương tiện</NavLink></li>
                             <li><NavLink>Chuyến đi</NavLink></li>
                             <li><NavLink>Về chúng tôi</NavLink></li>
                             <li><NavLink>Liên hệ</NavLink></li>

@@ -1,0 +1,23 @@
+.table-vehicles {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.table-vehicles, thead tr th, tbody tr td {
+    border: solid black;
+}
+
+.table-vehicles thead tr th {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.table-vehicles thead tr th, tbody tr td {
+    padding: 10px;
+    
+}
+
+.table-vehicles tbody tr td .btn-group {
+    display: flex;
+    justify-content: center;
+}
