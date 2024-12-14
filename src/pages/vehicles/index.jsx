@@ -16,17 +16,19 @@ function Vehicles() {
     const skip = useRef(0)
     const status = searchParam.get('status');
     const page = parseInt(searchParam.get('page') || 1)
+    const sortKey = searchParam.get('sortKey')
+    const sortValue = searchParam.get('sortValue')
     useEffect(() => {
-        loadData(keyword, status, page)
-    },[keyword, status, page])
+        loadData(keyword, status, page, sortKey, sortValue)
+    },[keyword, status, page, sortKey, sortValue])
 
-    async function loadData(keyword, status, page) {
-        const data = await getVehicles({keyword, status, page});
+    async function loadData(keyword, status, page, sortKey, sortValue) {
+        const data = await getVehicles({keyword, status, page, sortBy: sortKey, sortOrder: sortValue});
         setCountPage(data.totalPages)
         setVehicles(data.items)
         skip.current = data.skip 
     }
-
+    console.log(sortKey, sortValue)
     function handleSearchParam(currentStatus) {
         
         if(status === currentStatus.status) {
@@ -53,13 +55,27 @@ function Vehicles() {
         setSearchParam({page})
     }
 
+    function handleSortSelect(e) {
+        const value = e.target.value;
+        if(!value){
+            const param = searchParam.delete('sortKey');
+            const param2 = searchParam.delete('sortValue')
+            setSearchParam(param)
+            setSearchParam(param2)
+            return;
+
+        }
+        const [sortKey, sortValue] = value.split("-");
+        setSearchParam({sortKey, sortValue})
+    }
+
     return (
         <>
             <Header/>
             
             <div className="vehicle-content">
                 <div className="container">
-                    <Tool handleSearch={handleSearch} setSearchParam={handleSearchParam} currentStatus={status}/>
+                    <Tool handleSearch={handleSearch} setSearchParam={handleSearchParam} currentStatus={status} handleSortSelect={handleSortSelect} currentOption={`${sortKey}-${sortValue}`}/>
                     <table className="table-vehicles">
                         <thead>
                             <tr>

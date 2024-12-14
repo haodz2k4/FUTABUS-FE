@@ -2,13 +2,16 @@ import axios from "axios"
 
 const API_URL = `http://localhost:4000/api/v1/vehicles`
 
-export const getVehicles = async ({keyword = "", status, page, limit = 10}) => {
+export const getVehicles = async ({keyword = "", status, page, limit = 10, sortBy, sortOrder}) => {
+    console.log(`${sortBy} - ${sortOrder}`)
     const response = await axios.get(API_URL,{
         params: {
             keyword,
             status,
             page,
-            limit
+            limit,
+            sortBy,
+            sortOrder
         }
     })
     return response.data.data
